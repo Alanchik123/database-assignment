@@ -1,6 +1,4 @@
-package com.example.databaseassignment.diseasetype;
-
-import com.example.databaseassignment.disease.Disease;
+package com.example.databaseassignment.country;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,27 +10,18 @@ import javax.persistence.*;
 @Entity
 @Table
 
-public class DiseaseType {
+public class Country {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String cname;
+    private Long population;
 
-
-    public DiseaseType() {
+    public Country() {
     }
 
-    public DiseaseType(String cname) {
+    public Country(String cname, Long population) {
         this.cname = cname;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.population = population;
     }
 
     public String getCname() {
@@ -43,4 +32,11 @@ public class DiseaseType {
         this.cname = cname;
     }
 
+    public Long getPopulation() {
+        return population;
+    }
+
+    public void setPopulation(Long population) {
+        this.population = population;
+    }
 }

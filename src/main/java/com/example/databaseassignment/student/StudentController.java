@@ -1,46 +1,61 @@
 package com.example.databaseassignment.student;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.databaseassignment.student.StudentService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
-@RequestMapping(path="api/v1/student")
+@Controller
 public class StudentController {
 
-    private final StudentService studentService;
+    private StudentService studentService;
 
-    @Autowired
     public StudentController(StudentService studentService) {
+        super();
         this.studentService = studentService;
     }
 
-    @GetMapping
-    public List<Student> getStudents(){
-        return studentService.getStudents();
+    // handler method to handle list students and return mode and view
+    @GetMapping("/students")
+    public String listStudents(Model model) {
+        model.addAttribute("students", studentService.getAllStudents());
+        return "students";
+    }
+    @GetMapping("/students/new")
+    public String createStudentForm(Model model) {
+        //attribute Name student on 26 line is provided for 18 line create_student controller in object section
+        //firstname os the student class below is equal to a first name in create_student.html on 24 line firstname
+        Student student=new Student();
+        model.addAttribute("student",student);
+        return "create_student";
+    }
+    //this method redirects to the first getmapping method above
+    @PostMapping("/students")
+    public String saveStudent(@ModelAttribute("student") Student student) {
+            studentService.saveStudent(student);
+            return "redirect:/students";
     }
 
-    @PostMapping
-    public void registerNewStudent(@RequestBody Student student){
-        studentService.addNewStudent(student);
+    @GetMapping("/students/edit/{id}")
+    public String editStudentForm(@PathVariable Long id, Model model) {
+        model.addAttribute("student",studentService.getStudentById(id));
+        return "edit_student";
     }
 
-    @DeleteMapping(path= "{studentId}")
-    public void deleteStudent(@PathVariable("studentId") Long studentId){
-        studentService.deleteStudent(studentId);
+    @PostMapping("/students/{id}")
+    public String updateStudent(@PathVariable Long id,@ModelAttribute("student") Student student, Model model){
+        Student exisitngStudent=studentService.getStudentById(id);
+        exisitngStudent.setId(id);
+        exisitngStudent.setFirstName(student.getFirstName());
+        exisitngStudent.setLastName(student.getLastName());
+        exisitngStudent.setEmail(student.getEmail());
 
+        studentService.updateStudent(exisitngStudent);
+        return "redirect:/students";
     }
 
-    @PutMapping(path="{studentId}")
-    public void updateStudent(
-            @PathVariable("studentId") Long studentId,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String email) {
-        studentService.updateStudent(studentId,name,email);
+    @GetMapping("/students/{id}")
+    public String deleteStudent(@PathVariable Long id) {
+        studentService.deleteStudentById(id);
+        return "redirect:/students";
     }
-
-
-
 }
