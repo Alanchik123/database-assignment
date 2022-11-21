@@ -1,6 +1,5 @@
 package com.example.databaseassignment.disease;
 
-import com.example.databaseassignment.country.Country;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,12 +1,6 @@
 package com.example.databaseassignment.country;
 
-import com.example.databaseassignment.diseasetype.DiseaseType;
-import com.example.databaseassignment.diseasetype.DiseaseTypeRepository;
-import com.example.databaseassignment.student.Student;
-import com.example.databaseassignment.student.StudentRepository;
-import com.example.databaseassignment.student.StudentService;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.events.Event;
 
 import java.util.List;
 

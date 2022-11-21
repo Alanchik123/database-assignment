@@ -2,7 +2,10 @@ package com.example.databaseassignment.country;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class CountryController {
@@ -21,8 +24,6 @@ public class CountryController {
     }
     @GetMapping("/countrys/new")
     public String createCountryForm(Model model) {
-        //attribute Name student on 26 line is provided for 18 line create_student controller in object section
-        //firstname os the student class below is equal to a first name in create_student.html on 24 line firstname
         Country country=new Country();
         model.addAttribute("country",country);
         return "create_country";

@@ -1,10 +1,11 @@
 package com.example.databaseassignment.diseasetype;
 
-import com.example.databaseassignment.student.Student;
-import com.example.databaseassignment.student.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class DiseaseTypeController {
@@ -23,8 +24,7 @@ public class DiseaseTypeController {
     }
     @GetMapping("/diseaseTypes/new")
     public String createDiseaseTypeForm(Model model) {
-        //attribute Name student on 26 line is provided for 18 line create_student controller in object section
-        //firstname os the student class below is equal to a first name in create_student.html on 24 line firstname
+
         DiseaseType diseaseType=new DiseaseType();
         model.addAttribute("diseaseType",diseaseType);
         return "create_diseaseType";

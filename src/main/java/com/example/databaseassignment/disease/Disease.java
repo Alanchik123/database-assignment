@@ -1,12 +1,13 @@
 package com.example.databaseassignment.disease;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import java.time.LocalDate;
+import com.example.databaseassignment.diseasetype.DiseaseType;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import java.util.List;
+
 @Entity
 @Table
 
@@ -21,14 +22,19 @@ public class Disease {
 
     private Long id;
 
+    @ManyToMany
+    private List<DiseaseType> diseaseTypeForeign;
+
+
     public Disease() {
     }
 
-    public Disease(String diseaseCode, String pathogen, String description, Long id) {
+    public Disease(String diseaseCode, String pathogen, String description, Long id, List<DiseaseType> diseaseTypeForeign) {
         this.diseaseCode = diseaseCode;
         this.pathogen = pathogen;
         this.description = description;
         this.id = id;
+        this.diseaseTypeForeign = diseaseTypeForeign;
     }
 
     public String getDiseaseCode() {
@@ -61,5 +67,13 @@ public class Disease {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<DiseaseType> getDiseaseTypeForeign() {
+        return diseaseTypeForeign;
+    }
+
+    public void setDiseaseTypeForeign(List<DiseaseType> diseaseTypeForeign) {
+        this.diseaseTypeForeign = diseaseTypeForeign;
     }
 }

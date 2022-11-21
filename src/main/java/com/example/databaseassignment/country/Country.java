@@ -1,12 +1,8 @@
 package com.example.databaseassignment.country;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import java.time.LocalDate;
-
-import javax.persistence.*;
+import javax.persistence.Table;
 @Entity
 @Table
 
